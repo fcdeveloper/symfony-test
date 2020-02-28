@@ -13,13 +13,17 @@
                     <td>
                         <div class="form-group">
                             <label for="product">Product</label>
-                            <select class="form-control" id="product">
+                            <select onchange="javascript:window.location.replace('/sales/'+this.value)" class="form-control" id="product">
+                            <option value="" selected>- all products -</option>
+                            {% for product in products %}
+                            <option {{ product.id == product_id ? 'selected' : '' }} value="{{  product.id }}">{{ product.productname }}</option>
+                            {% endfor %}
                             </select>
                         </div>
                     </td>
-                    <td style="text-align:right;">
+                    {# <td style="text-align:right;">
                         <button class="btn btn-primary">SEARCH</button>
-                    </td>
+                    </td> #}
                 </table>
             </div>
             <div class="row">
@@ -32,16 +36,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for sale in sales %}
                         <tr>
-                            <td scope="row"></td>
-                            <td></td>
-                            <td></td>
+                            <td scope="row">{{ sale.date|date("m/d/Y H:i") }}</td>
+                            <td>{{ sale.product }}</td>
+                            <td>${{ sale.amount|number_format(2,'.',',') }}</td>
                         </tr>
-                        <tr>
-                            <td scope="row"></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>           
