@@ -10,27 +10,20 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
     /**
-     * @ORM\IdProduct()
-     * @ORM\GeneratedValue()
+     * @ORM\idproduct()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private $idproduct;
+    protected $idproduct;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $productname;
 
-    public function getIdproduct(): ?int
+    public function getIdProduct(): ?int
     {
         return $this->idproduct;
-    }
-
-    public function setIdproduct(int $idproduct): self
-    {
-        $this->idproduct = $idproduct;
-
-        return $this;
     }
 
     public function getProductname(): ?string
